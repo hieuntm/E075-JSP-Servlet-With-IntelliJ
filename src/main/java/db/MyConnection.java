@@ -30,7 +30,7 @@ public class MyConnection {
 
     public MyConnection() {
         // Kết tới local database
-        this.ip = "127.0.0.1"; // -- 127.0.0.1
+        this.ip = "localhost"; // -- 127.0.0.1
         this.port = "3306";
         this.database = "classicmodels";
         this.username = "root";
@@ -58,12 +58,17 @@ public class MyConnection {
     public Connection connect() {
         Connection connection = null;
         try {
+            // Thêm dòng này
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //
             connection = DriverManager.getConnection(this.url, this.username, this.password);
             // Exception, cái dòng mà sinh ra exception -> nhảy trực tiếp sang catch
             // Nếu mà không có error
 //            System.out.println("Connected to database");
         } catch (SQLException ex) {
-            System.err.println("Error while connecting to database");
+            System.err.println("Error while connecting to database, " + ex.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("Can not found driver: " +e.getMessage());
         }
         return connection;
     }
