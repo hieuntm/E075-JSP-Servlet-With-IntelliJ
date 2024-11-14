@@ -1,0 +1,18 @@
+1. Tải file nén ở trên classroom về
+2. Giải nén ra, trong file sẽ chứa 4 phần
+-- 1 là slide: [GA] JSP-SERVLET.pdf
+
+-- 2 là apache-tomcat-xxVersion.rar
+        -> giải nén nó ra
+-- 3 là jsp-servlet-start.rar
+        -> đây là project -> giải nén nó ra
+-- 4 là folder có tên là jstl
+        -> đây là thư viện để phục vụ sau này
+
+3. Sau khi hoàn thành bước 2.
+- Mở file project với IntelliJ
+- Chọn JDK 17
+- Setup tomcat server -> Choose File
+- Phần use classpath: trỏ đến project
+- Phần use context: để dấu /
+

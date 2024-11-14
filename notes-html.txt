@@ -1,0 +1,8 @@
+thẻ a -> Thẻ dùng để nhúng link vào -> https://www.google.com
+// -> http://,,,
+// -> tên folder -> nhúng vào thẻ img
+// -> Trỏ tới 1 service nào đấy - mapping
+// Eclipse, thì thường sẽ config bằng file xml -> Phức tjap
+-- Project giới thiệu, đơn giản tối đa
+
+// Thẻ a -> thẻ get, lấy dữ liệu

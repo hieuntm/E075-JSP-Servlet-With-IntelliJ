@@ -1,0 +1,11 @@
+HTML -> File tĩnh -> Không thay đổi content(nội dung) được
+Khi mà đưa lên mà web, webapp, ngta sinh ra 1 file tương ứng với HTML
+để làm giao diện cho người dùng
+
+Đối với JSP-Servlet -> JSP là file hiển thị -> Servlet bản chất nó là 1 con Service
+nào đấy, đơn thuần thì nó là file Java
+
+Đối với Spring-web/ Spring MVC -> File hiển thị có thể là nhiều kiểu
+JSP, Thyemleaf
+
+Đối với anh em dùng NodeJS -> Pug, EJS, HandleBars

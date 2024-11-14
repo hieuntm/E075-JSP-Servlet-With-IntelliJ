@@ -1,0 +1,13 @@
+GET --> Sử dụng nhiều
+        -> Get thì lấy lấy dữ liệu
+        -> Dùng trực tiếp bằng thẻ a
+        -> doGet
+POST -> Sử dụng nhiều
+           -> Khởi tạo dữ liệu, hoặc xử lý dữ liệu
+           -> Dùng thẻ form html
+           -> doPost
+DELETE
+PUT
+PATCH
+OPTIONS
+HEADER
