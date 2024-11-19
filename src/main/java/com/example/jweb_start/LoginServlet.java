@@ -27,8 +27,8 @@ import java.io.IOException;
 // Windows dùng control + alt + O
 // Mac dùng control + option + L => Format code
 // Windows dùng control + alt + L
-@WebServlet(name = "account-servlet", value = "/account")
-public class AccountServlet extends HttpServlet {
+@WebServlet(name = "login-servlet", value = "/login")
+public class LoginServlet extends HttpServlet {
 
     private AccountService accountService;
 
@@ -37,10 +37,10 @@ public class AccountServlet extends HttpServlet {
         accountService = new AccountService();
     }
 
-    //
+    // Xử lý form action submit
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("AccountServlet doPost");
+        System.out.println("LoginServlet doPost");
 
         // request -> lấy dữ liệu
         // response -> trả về dữ liệu hoặc view
@@ -53,25 +53,32 @@ public class AccountServlet extends HttpServlet {
 
         Account account = accountService.getAccountByUsernameAndPassword(username, password);
 
-        String view = "error.jsp";
+        String view = "account.jsp";
         if(account == null){
-            RequestDispatcher rd = req.getRequestDispatcher(view);
-            rd.forward(req, resp);
+            view = "index.jsp";
+            req.setAttribute("errorMessage", "Username or password is incorrect");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher(view);
+            requestDispatcher.forward(req, resp);
+            // sử dụng redirect -> đăng nhập sai -> bắt đăng nhập lại
         }
 
-        view = "account.jsp";
         // account có đăng nhập
         // Đẩy dữ liệu lên view kiểu gì?
         req.setAttribute("username", account.getUsername());
         req.setAttribute("role", account.getRole());
+        // Truyền kèm data thông qua request
         // Nó sẽ đẩy dữ liệu ra cái view ở phần dispatcher -> view
         // Key - value
         RequestDispatcher rd = req.getRequestDispatcher(view);
         rd.forward(req, resp);
     }
 
+    // Xử lý a href
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("AccountServlet doGet");
+        System.out.println("LoginServlet doGet");
+        // chưa redirect
+        // chưa forward
+        resp.sendRedirect("index.jsp");
     }
 }

@@ -1,0 +1,15 @@
+JSP -> Sự kết hợp của HTML và JavaCode
+// JavaServer Page
+
+Servlet -> Class JavaCode, hứng request, bằng href
+
+// Khi 1 button submit -> Thường thì đẩy vào 1 cái form
+-> mặc định là method POST và sử dụng doPOST trong Servlet tương ứng
+
+// Thường thì trong Servlet ->
+doGet -> a href  (Click vào thẻ a thì gọi doGet) -> /account
+doPost -> form button submit -> click vào button trong thẻ form
+-> Cả 2 thằng này, muốn đẩy ra view thì phải sử dụng
+RequestDispatcher -> kèm data đi cùng -> request.setAttribute
+-> Sử dụng redirect -> chuyển tiếp trực tiếp sang 1 page khác
+-> ko kèm data
