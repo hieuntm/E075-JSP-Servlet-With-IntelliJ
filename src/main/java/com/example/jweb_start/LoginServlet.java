@@ -1,6 +1,7 @@
 package com.example.jweb_start;
 
 import account.AccountService;
+import account.ProductService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -31,10 +32,12 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     private AccountService accountService;
+    private ProductService productService;
 
     @Override
     public void init(ServletConfig config) {
         accountService = new AccountService();
+        productService = new ProductService();
     }
 
     // Xử lý form action submit
@@ -54,7 +57,7 @@ public class LoginServlet extends HttpServlet {
         Account account = accountService.getAccountByUsernameAndPassword(username, password);
 
         String view = "account.jsp";
-        if(account == null){
+        if (account == null) {
             view = "index.jsp";
             req.setAttribute("errorMessage", "Username or password is incorrect");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(view);
@@ -66,6 +69,8 @@ public class LoginServlet extends HttpServlet {
         // Đẩy dữ liệu lên view kiểu gì?
         req.setAttribute("username", account.getUsername());
         req.setAttribute("role", account.getRole());
+        req.setAttribute("products", productService.getAllProducts()); // => Đẩy kèm 1 list các product lên trên view này, việc của mình
+        // từ view hiển thị nó ra
         // Truyền kèm data thông qua request
         // Nó sẽ đẩy dữ liệu ra cái view ở phần dispatcher -> view
         // Key - value
