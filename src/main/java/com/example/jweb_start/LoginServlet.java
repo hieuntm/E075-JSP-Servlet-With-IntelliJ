@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // B1. Extends HttpServlet
@@ -84,6 +86,12 @@ public class LoginServlet extends HttpServlet {
         System.out.println("LoginServlet doGet");
         // chưa redirect
         // chưa forward
-        resp.sendRedirect("index.jsp");
+//        req.setAttribute("accounts", new ArrayList<>()); // Mảng trắng -> ko có dữ liệu
+        // Viết service -> account select *
+        List<Account> test = accountService.getAllAccount();
+        req.setAttribute("accounts", test);
+        // ĐÍnh kèm 1 mảng dữ liệu, được đặt tên là accounts
+        // lên trang jsp
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 }

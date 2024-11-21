@@ -4,6 +4,8 @@ import db.MyConnection;
 import model.Account;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountService {
 
@@ -15,6 +17,7 @@ public class AccountService {
         customerService = new CustomerService();
     }
 
+    // Mục đích = login
     public Account getAccountByUsernameAndPassword(String usernameInput, String passwordInput) {
         String query = "SELECT * FROM accounts where username = ? and password = ?";
         ResultSet rs = null;
@@ -37,6 +40,53 @@ public class AccountService {
             connection.closeResultSet(rs, "getAccountByUsernameAndPassword");
         }
         return null; // điều kiện 2 ko có
+    }
+
+    public List<Account> getAllAccount() {
+        List<Account> result = new ArrayList<>();
+        String query = "SELECT * FROM accounts";
+        try (Connection conn = connection.connect();
+             Statement ps = conn.createStatement();
+             ResultSet rs = ps.executeQuery(query);) {
+            // Nếu mà rs.next() => trả về null, tức là nó không có data
+            while (rs.next()) { // nếu mà trả ra 1 ghi duy nhất thì dùng if, còn không trả về list thì dùng while
+                long id = rs.getLong("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                result.add(new Account(id, username, password, role));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void deleteAccount(String username) {
+        String query = " DELETE FROM accounts  WHERE username = ?";
+        try (Connection conn = connection.connect();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, username);
+            int row = ps.executeUpdate();
+            System.out.println("Account deleted: " + row);
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+
+    public void updateAccount(String username, String password, String role) {
+        String query = " UPDATE accounts SET password = ?, role = ? WHERE username = ?";
+
+        try (Connection conn = connection.connect();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, password);
+            ps.setString(2, role);
+            ps.setString(3, username);
+            ps.executeUpdate();
+            System.out.println("Account với username: " + username + " đã được update: ");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi update account: " + ex.getMessage());
+        }
     }
 
     public void insertAccount(String username, String password) {
