@@ -1,0 +1,14 @@
+Sử dụng lại project: jsp-servlet-template
+1. Tạo 1 trang web  cho người dùng nhập vào todo-list
+Các tác vụ cần thực hiện trong ngày
+
+Yêu cầu: tạo bảng mới có tên là là todo
+- cột Id: tự tăng, int, primary key
+- cột Task: varchar(300)
+- cột Status: int (0: chưa hoàn thành, 1: đã hoàn thành)
+
+2. Hiển thị danh sách todo-list ra trang index.jsp
+3. Từ trang index.jsp cùng với list danh sách,
+sinh ra 2 link a cho phép
+- update tên task và status của todo (tạo ra 1 file update-jsp)
+- delete task theo id
